@@ -9,14 +9,18 @@ import java.util.List;
 @Repository
 public class TransacaoRepository {
 
-    private List<Transacao> transacoes = new ArrayList<>();
+    private final List<Transacao> transacoes = new ArrayList<>();
 
 
     public void save(Transacao transacao) {
+        System.out.println("Added - " + transacao.getValor() + ", " + transacao.getDataHora());
         transacoes.add(transacao);
     }
 
     public void clear() {
         transacoes.clear();
+    }
+    public List<Transacao> listAll() {
+        return transacoes;
     }
 }

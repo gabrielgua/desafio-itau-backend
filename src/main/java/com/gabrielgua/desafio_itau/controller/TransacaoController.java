@@ -24,4 +24,9 @@ public class TransacaoController {
     public void saveTransaction(@Valid @RequestBody Transacao transacao) {
         service.save(transacao);
     }
+
+    @DeleteMapping(consumes = MediaType.ALL_VALUE)
+    public void clearTransactions() {
+        service.clear();
+    }
 }
