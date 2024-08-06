@@ -16,14 +16,13 @@ import java.util.DoubleSummaryStatistics;
 public class EstatisticaService {
 
     private final TransacaoRepository repository;
-    private static final Integer INTERVAL = 60;
 
-    public DoubleSummaryStatistics calculate() {
+    public DoubleSummaryStatistics calculate(long interval) {
         log.info("Calculando estatísticas");
         var transacoes = repository.listAll();
 
         return transacoes.stream()
-                .filter(t -> t.getDataHora().isAfter(OffsetDateTime.now().minusSeconds(INTERVAL)) || t.getDataHora().equals(OffsetDateTime.now()))
+                .filter(t -> t.getDataHora().isAfter(OffsetDateTime.now().minusSeconds(interval)) || t.getDataHora().equals(OffsetDateTime.now()))
                 .map(Transacao::getValor)
                 .mapToDouble(BigDecimal::doubleValue)
                 .summaryStatistics();
